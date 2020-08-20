@@ -121,6 +121,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-LOGIN_REDIRECT_URL = 'http://79.143.185.100:8001/home/'
-LOGOUT_REDIRECT_URL = 'home'
+LOGIN_REDIRECT_URL = '/auth/login/'
+LOGOUT_REDIRECT_URL = '/'
 LOGIN_URL = '/auth/login/'
