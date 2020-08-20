@@ -9,7 +9,6 @@ class LoginView(TemplateView):
   template_name = 'registration/login.html'
 
   def post(self, request, **kwargs):
-
     username = request.POST.get('username', False)
     password = request.POST.get('password', False)
     user = authenticate(username=username, password=password)
