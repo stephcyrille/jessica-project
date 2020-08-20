@@ -7,6 +7,7 @@ from django.views.generic.base import TemplateView
 test_client = Client(settings.SSO_SERVER, settings.SSO_PUBLIC_KEY, settings.SSO_PRIVATE_KEY)
 
 urlpatterns = [
+    url(r'^admin/clearcache/', include('clearcache.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^client/', include(test_client.get_urls())),
     url(r'^accounts/', include('django.contrib.auth.urls')),

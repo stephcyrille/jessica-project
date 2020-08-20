@@ -21,6 +21,7 @@ from simple_sso.sso_server.server import Server
 test_server = Server()
 
 urlpatterns = [
+    url(r'^admin/clearcache/', include('clearcache.urls')),
     url(r'^admin/', admin.site.urls),
 ]
 
