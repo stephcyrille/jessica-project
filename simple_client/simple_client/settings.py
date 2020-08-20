@@ -54,7 +54,7 @@ ROOT_URLCONF = 'simple_client.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -123,3 +123,6 @@ STATIC_URL = '/static/'
 SSO_PRIVATE_KEY = 'rX82N7TwK8nyy6rrRH2fa9Gtmcsz1GVZ9uGVKsVuWfMr//QZXuWso90bvvTvoI20'
 SSO_PUBLIC_KEY = 'AAAAB3NzaC1yc2EAAAADAQABAAABAQDUTtGtyQimsRt2uuTmud53azGJim3AdzrxDQwcSspNG4zGPUrlT8'
 SSO_SERVER = 'http://79.143.185.100:8000/server/'
+
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'
