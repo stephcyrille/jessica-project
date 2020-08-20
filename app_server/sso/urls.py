@@ -22,6 +22,7 @@ test_server = Server()
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^accounts/', include('django.contrib.auth.urls')),
 ]
 
 urlpatterns += [
