@@ -1,14 +1,51 @@
-<!-- templates/registration/login.html -->
+<!-- templates/home.html-->
 {% extends 'base.html' %}
+{% load static %}
 
-{% block title %}Login{% endblock %}
+{% block title %}SSO Authentification{% endblock %}
+
+{% block custom_style %}
+  <link href="{% static 'css/custom/login.css' %}" rel="stylesheet" >
+{% endblock %}
+
 
 {% block content %}
-<h2>Login</h2>
-<form method="post"  role="form" action={% url 'login' %}>
-  {% csrf_token %}
-  <input type="text" name="username" placeholder="Utilisateur">
-  <input type="password" name="password" placeholder="Mot de passe">
-  <input type="submit" value="login" />
-</form>
+  <div class="login-reg-panel" style="margin-top: 90px !important">
+    <div class="login-info-box">
+      <h2>Passédez-vous déja un compte ?</h2>
+      <p>Alors accédez à votre espace membre</p>
+      <label id="label-register" for="log-reg-show">Login</label>
+      <input type="radio" name="active-log-panel" id="log-reg-show"  checked="checked">
+    </div>
+
+    <div class="register-info-box">
+      <h2>Vous n'avez pas encore de compte ?</h2>
+      <p>C'est simple! Commencez par vous enregistrer</p>
+      <label id="label-login" for="log-login-show">Register</label>
+      <input type="radio" name="active-log-panel" id="log-login-show">
+    </div>
+
+    <div class="white-panel">
+      <form class="login-show" method="post"  role="form" action={% url 'login' %}>
+        {% csrf_token %}
+        <h2>SE CONNECTER</h2>
+        <input type="text" placeholder="Nom d'utilisateur" name="username" />
+        <input type="password" placeholder="Password" name="password" />
+        <input type="submit" value="se connecter">
+        <a href="">Mot de passe oublié ?</a>
+      </form>
+      <div class="register-show">
+        <h2>S'ENREGISTRER</h2>
+        <input type="text" placeholder="Nom d'utilisateur" name="username" />
+        <input type="text" placeholder="Email" name="email" />
+        <input type="password" placeholder="Mot de Passe" name="password" />
+        <input type="password" placeholder="Confirmation mot de passe" name="re_password" />
+        <input type="button" value="Enregistrer">
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block custom_js %}
+  <script type="text/javascript" src="{% static 'js/login.js' %}"></script>
 {% endblock %}

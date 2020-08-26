@@ -25,13 +25,12 @@ SECRET_KEY = '33^38#$d*2-7k^ne$wd&98e+x(@vdkfi66b=@%+#o^9(8eave!'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["79.143.185.100"]
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'clearcache',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -120,6 +119,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static_and_media", "static"),
+]
+
+LOGIN_URL="/login/"
 
 SSO_PRIVATE_KEY = 'rX82N7TwK8nyy6rrRH2fa9Gtmcsz1GVZ9uGVKsVuWfMr//QZXuWso90bvvTvoI20'
 SSO_PUBLIC_KEY = 'AAAAB3NzaC1yc2EAAAADAQABAAABAQDUTtGtyQimsRt2uuTmud53azGJim3AdzrxDQwcSspNG4zGPUrlT8'
