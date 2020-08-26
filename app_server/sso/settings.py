@@ -25,7 +25,7 @@ SECRET_KEY = 'ph=)t9z*sh)yn0_ayji7p3nor-_@s*z$66lf4^1+imte34^xs7'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["79.143.185.100"]
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -121,6 +121,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-LOGIN_REDIRECT_URL = 'http://79.143.185.100:8001/home/'
+LOGIN_REDIRECT_URL = 'http://localhost:8001/home/'
 LOGOUT_REDIRECT_URL = 'login'
 LOGIN_URL = 'login'
