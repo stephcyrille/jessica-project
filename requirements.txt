@@ -22,4 +22,4 @@ traitlets==4.3.3
 urllib3==1.25.10
 wcwidth==0.2.5
 webservices==0.7
-django-clearcache==1.0.1
+django-clearcache

@@ -6,10 +6,10 @@ from .views import LoginView, LogoutView
 test_server = Server()
 
 urlpatterns = [
-    url(r'^cache/clearcache/', include('clearcache.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^auth/login/$', LoginView.as_view(), name="login"),
     url(r'^auth/logout/$', LogoutView.as_view(), name="logout"),
+    # url(r'^auth/login/$', login, name="login"),
 ]
 
 urlpatterns += [
