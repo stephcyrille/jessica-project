@@ -22,8 +22,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'ph=)t9z*sh)yn0_ayji7p3nor-_@s*z$66lf4^1+imte34^xs7'
 
+OTP_SECRET_KEY = 'S3K3TPI5MYA2M67V'
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+
+# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+from qr_code.qrcode import constants
 
 ALLOWED_HOSTS = ["*"]
 
@@ -38,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'simple_sso.sso_server',
+    'qr_code',
 ]
 
 MIDDLEWARE = [
@@ -127,3 +133,25 @@ STATICFILES_DIRS = [
 LOGIN_REDIRECT_URL = 'http://localhost:8001/home/'
 LOGOUT_REDIRECT_URL = 'login'
 LOGIN_URL = 'login'
+
+
+# Caches.
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+    },
+    'qr-code': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'qr-code-cache',
+        'TIMEOUT': 3600
+    }
+}
+
+# Django QR Code specific options.
+QR_CODE_CACHE_ALIAS = 'qr-code'
+QR_CODE_URL_PROTECTION = {
+    constants.TOKEN_LENGTH: 30,  # Optional random token length for URL protection. Defaults to 20.
+    constants.SIGNING_KEY: SECRET_KEY,  # Optional signing key for URL token. Uses SECRET_KEY if not defined.
+    # constants.SIGNING_SALT: 'my-signing-salt',  # Optional signing salt for URL token.
+    constants.ALLOWS_EXTERNAL_REQUESTS_FOR_REGISTERED_USER: False   # Tells whether a registered user can request the QR code URLs from outside a site that uses this app. It can be a boolean value used for any user, or a callable that takes a user as parameter. Defaults to False (nobody can access the URL without the security token).
+}

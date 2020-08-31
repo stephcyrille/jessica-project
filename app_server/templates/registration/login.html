@@ -14,14 +14,14 @@
     <div class="login-info-box">
       <h2>Passédez-vous déja un compte ?</h2>
       <p>Alors accédez à votre espace membre</p>
-      <label id="label-register" for="log-reg-show">Login</label>
+      <label id="label-register" for="log-reg-show">Se connecter</label>
       <input type="radio" name="active-log-panel" id="log-reg-show"  checked="checked">
     </div>
 
     <div class="register-info-box">
       <h2>Vous n'avez pas encore de compte ?</h2>
       <p>C'est simple! Commencez par vous enregistrer</p>
-      <label id="label-login" for="log-login-show">Register</label>
+      <label id="label-login" for="log-login-show">S'enregistrer</label>
       <input type="radio" name="active-log-panel" id="log-login-show">
     </div>
 
@@ -29,6 +29,11 @@
       <form class="login-show" method="post"  role="form" action={% url 'login' %}>
         {% csrf_token %}
         <h2>SE CONNECTER</h2>
+        {% if message %}
+            <ul class='form-errors text-danger'>
+              <li>{{ message }}</li>
+            </ul>
+        {% endif %}
         <input type="text" placeholder="Nom d'utilisateur" name="username" />
         <input type="password" placeholder="Password" name="password" />
         <input type="submit" value="se connecter">
