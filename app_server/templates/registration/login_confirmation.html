@@ -1,0 +1,43 @@
+<!-- templates/home.html-->
+{% extends 'base.html' %}
+{% load static %}
+{% load qr_code %}
+
+{% block title %}QR Authentification{% endblock %}
+
+{% block custom_style %}
+  <link href="{% static 'css/custom/login.css' %}" rel="stylesheet" >
+{% endblock %}
+
+{% block content %}
+<div class="login-reg-panel" style="margin-top: 90px !important">
+  <div class="login-info-box" style="width:70% !important;">
+    <h2 style="padding-top: 20px !important">Bienvenu {{ user.username }}</h2>
+    <p>Heureux de vous revoir !</p>
+    <p>Pour continuer vous êtes prier de scannez le code à partir de l'application mobile.
+      l'application mobile peut être télécharger sur Playstore.</p>
+      <form class="" method="post"  role="form" action={% url 'qr_login' %}>
+        {% csrf_token %}
+        <input type="text" placeholder="Saisir le OTP et continuer" name="authtoken" style="width: inherit !important; margin-bottom: 15px; border-radius: 10px; padding: 5px 20px; text-align: center" />
+        <input type="submit" class="btn btn-outline-light" value="Poursuivre l'authentification" style="width: inherit !important;" />
+      </form>
+      {% if auth_message %}
+          <ul class='form-errors text-white' style="padding-left: 15px; font-weight: bolder">
+            <li>{{ auth_message }}</li>
+          </ul>
+      {% endif %}
+  </div>
+
+  <div class="register-info-box" style="padding-right: 40px">
+    <img
+      src="{% qr_url_from_text hash_code size=8 version=10 image_format='png' %}"
+      alt="Hello World!"
+      style="width: 100%; border-radius: 10px"
+    >
+  </div>
+</div>
+{% endblock %}
+
+{% block custom_js %}
+
+{% endblock %}
