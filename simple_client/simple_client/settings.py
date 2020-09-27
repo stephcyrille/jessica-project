@@ -103,9 +103,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'fr-fr'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Africa/Douala'
 
 USE_I18N = True
 
@@ -124,6 +124,6 @@ STATICFILES_DIRS = [
 ]
 
 
-SSO_PUBLIC_KEY = 'Vwz1bzckvySlpDVszOvRTWv8631cuy6u2iChRVKVHRQFQKVs1DtpQEUqucRRxEVw'
-SSO_PRIVATE_KEY = 'AZ0tOgjfveKcMPKJvGsV3g8owbutyrloX8kZ9f0FgHAl1NdOmK1ygRu5PBzAYUFa'
+SSO_PUBLIC_KEY = 'aNwo2tJJpVc2U2YZb5wUa4xiQCVz1NdawRenDGCkYr059r8QZeJV2YVTRoeugMYA'
+SSO_PRIVATE_KEY = 'VKNRYR5NRrjJwugGEC3ILq82Xk0HoJxB4VNbilumSyugt9Wlb6CnzOg0RRTuJ8by'
 SSO_SERVER = 'http://localhost:8000/server/'

@@ -5,6 +5,9 @@ from django.views.generic import TemplateView
 from django.conf import settings
 import pyotp
 from .forms import LoginForm
+from encrypted_login.models import AuthChecker
+from .lib.code_generator import generateCode
+from .lib.code_encrypt_decrypt import encrypt_message, decrypt_message
 
 
 
@@ -61,18 +64,27 @@ def qr_login(request):
     template_name = 'registration/login_confirmation.html'
     if request.method == "POST":
         authtoken = request.POST.get('authtoken', False)
-        base32secret = settings.OTP_SECRET_KEY
-        totp = pyotp.TOTP(base32secret)
-        if totp.verify(authtoken) == True:
+        # TODO Check code hashedv there
+        auth_checker = AuthChecker.objects.filter(status="wait").first()
+        if authtoken == auth_checker.q_code:
             return HttpResponseRedirect( settings.LOGIN_REDIRECT_URL )
         else:
             context = {
                 "auth_message" : "Mauvais OTP ou OTP expiré"
             }
             return render(request, template_name, context)
-    authUri = pyotp.totp.TOTP(settings.OTP_SECRET_KEY).provisioning_uri(issuer_name="Jess 2FA Server")
-    print(authUri)
+    user = request.user
+    code = generateCode(6)
+    #  Put each authchecke reauest to close
+    old_auth_checkers = AuthChecker.objects.filter(user=request.user, status="wait")
+    for a in old_auth_checkers:
+        a.status = "close"
+        a.save()
+    auth_checker = AuthChecker(user=user, q_code=code)
+    auth_checker.save()
+    encrypted_code = encrypt_message(code, settings.OTP_SECRET_KEY)
+    print(encrypted_code)
     context = {
-        "hash_code" : authUri
+        "hash_code" : encrypted_code
     }
     return render(request, template_name, context)

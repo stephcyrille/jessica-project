@@ -22,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'ph=)t9z*sh)yn0_ayji7p3nor-_@s*z$66lf4^1+imte34^xs7'
 
-OTP_SECRET_KEY = 'S3K3TPI5MYA2M67V'
+OTP_SECRET_KEY = 'kksi2k2xCr0Difr64haraOg135wPPYHSIpk19ml8pms='
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -42,8 +42,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'rest_auth',
     'simple_sso.sso_server',
     'qr_code',
+    'encrypted_login',
 ]
 
 MIDDLEWARE = [
@@ -109,10 +113,10 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
+# Change language of global app
+LANGUAGE_CODE = 'fr-fr'
 
-LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Africa/Douala'
 
 USE_I18N = True
 
@@ -154,4 +158,10 @@ QR_CODE_URL_PROTECTION = {
     constants.SIGNING_KEY: SECRET_KEY,  # Optional signing key for URL token. Uses SECRET_KEY if not defined.
     # constants.SIGNING_SALT: 'my-signing-salt',  # Optional signing salt for URL token.
     constants.ALLOWS_EXTERNAL_REQUESTS_FOR_REGISTERED_USER: False   # Tells whether a registered user can request the QR code URLs from outside a site that uses this app. It can be a boolean value used for any user, or a callable that takes a user as parameter. Defaults to False (nobody can access the URL without the security token).
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    )
 }
