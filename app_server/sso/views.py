@@ -10,23 +10,6 @@ from .lib.code_generator import generateCode
 from .lib.code_encrypt_decrypt import encrypt_message, decrypt_message
 
 
-
-# # Create your views here.
-# def login(request):
-#     template_name = 'registration/login.html'
-#     context = {}
-#     form = LoginForm(request.POST or None)
-#     context['form'] = form
-#     if request.POST:
-#         if form.is_valid():
-#             temp = form.cleaned_data.get("username")
-#             print(temp)
-#             # user = authenticate(username=username, password=password)
-#             if user is not None and user.is_active:
-#                 login(request, user)
-#                 return HttpResponseRedirect( settings.LOGIN_REDIRECT_URL )
-#     return render(request, template_name, context)
-
 class LoginView(TemplateView):
 
   template_name = 'registration/login.html'
@@ -67,10 +50,16 @@ def qr_login(request):
         # TODO Check code hashedv there
         auth_checker = AuthChecker.objects.filter(status="wait").first()
         if authtoken == auth_checker.q_code:
-            return HttpResponseRedirect( settings.LOGIN_REDIRECT_URL )
+            if not auth_checker.is_expired():
+                return HttpResponseRedirect(settings.LOGIN_REDIRECT_URL)
+            else:
+                context = {
+                "auth_message" : "Votre OTP a expiré"
+            }
+            return render(request, template_name, context)
         else:
             context = {
-                "auth_message" : "Mauvais OTP ou OTP expiré"
+                "auth_message" : "Mauvais OTP"
             }
             return render(request, template_name, context)
     user = request.user

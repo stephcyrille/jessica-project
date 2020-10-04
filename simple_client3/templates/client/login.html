@@ -1,0 +1,36 @@
+<!-- templates/home.html-->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Login{% endblock %}
+
+{% block custom_style %}
+  <link href="{% static 'css/custom/login.css' %}" rel="stylesheet" >
+{% endblock %}
+
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+      <div class="card card-signin my-5">
+        <div class="card-body">
+          <h5 class="card-title text-center">Se connecter (App 3)</h5>
+          <form class="form-signin">
+            <a class="btn btn-lg btn-success btn-block text-uppercase" href="/client/">
+              <i class="fa fa-key fa-2x"></i> &nbsp; &nbsp;
+              Authentification unique
+            </a>
+            <!-- <hr class="my-4">
+            <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i class="fab fa-google mr-2"></i> Sign in with Google</button>
+            <button class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit"><i class="fab fa-facebook-f mr-2"></i> Sign in with Facebook</button> -->
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block custom_js %}
+{% endblock %}
