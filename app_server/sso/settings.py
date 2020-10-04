@@ -134,7 +134,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static_and_media", "static"),
 ]
 
-LOGIN_REDIRECT_URL = 'http://localhost:8001/home/'
+#LOGIN_REDIRECT_URL = 'http://192.168.43.216:8001/home/'
 LOGOUT_REDIRECT_URL = 'login'
 LOGIN_URL = 'login'
 

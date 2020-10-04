@@ -36,6 +36,7 @@
         {% endif %}
         <input type="text" placeholder="Nom d'utilisateur" name="username" />
         <input type="password" placeholder="Password" name="password" />
+        <input type="hidden" name="next" value="{{ request.GET.next }}"/>
         <input type="submit" value="se connecter">
         <a href="">Mot de passe oublié ?</a>
       </form>

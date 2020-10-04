@@ -123,7 +123,8 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static_and_media", "static"),
 ]
 
+LOGIN_URL = 'login'
 
-SSO_PUBLIC_KEY = 'aNwo2tJJpVc2U2YZb5wUa4xiQCVz1NdawRenDGCkYr059r8QZeJV2YVTRoeugMYA'
-SSO_PRIVATE_KEY = 'VKNRYR5NRrjJwugGEC3ILq82Xk0HoJxB4VNbilumSyugt9Wlb6CnzOg0RRTuJ8by'
-SSO_SERVER = 'http://localhost:8000/server/'
+SSO_PUBLIC_KEY = 'WPZbwGKcUdwZji6pnTcXDZTdJQvbIvOI9qE72l4rme38STRuD7RM8D8MxyMnqGS9'
+SSO_PRIVATE_KEY = 'D3vzaewMKJWFnrjSD9rceCiaeqeuwm84yiZetijTlhMly98aXkCxAcc7SQPAJ9pK'
+SSO_SERVER = 'http://192.168.43.216:8000/server/'

@@ -20,6 +20,8 @@ class LoginView(TemplateView):
     user = authenticate(username=username, password=password)
     if user is not None and user.is_active:
         login(request, user)
+        next_value = request.POST.get("next")
+        request.session['next_value'] = next_value
         return HttpResponseRedirect('qr/login/')
         # return HttpResponseRedirect( settings.LOGIN_REDIRECT_URL )
 
@@ -48,10 +50,17 @@ def qr_login(request):
     if request.method == "POST":
         authtoken = request.POST.get('authtoken', False)
         # TODO Check code hashedv there
-        auth_checker = AuthChecker.objects.filter(status="wait").first()
+        auth_checker = AuthChecker.objects.filter(status="wait", user=request.user).first()
+        print("Controller Code pin", auth_checker.q_code)
         if authtoken == auth_checker.q_code:
             if not auth_checker.is_expired():
-                return HttpResponseRedirect(settings.LOGIN_REDIRECT_URL)
+                if 'next_value' in request.session:
+                    next_value = request.session['next_value']
+                    return HttpResponseRedirect(next_value)
+                context = {
+                    "auth_message" : "Token d'authentification expiré"
+                }
+                return render(request, template_name, context)
             else:
                 context = {
                 "auth_message" : "Votre OTP a expiré"
@@ -72,7 +81,7 @@ def qr_login(request):
     auth_checker = AuthChecker(user=user, q_code=code)
     auth_checker.save()
     encrypted_code = encrypt_message(code, settings.OTP_SECRET_KEY)
-    print(encrypted_code)
+    print("Encrypted code" ,encrypted_code)
     context = {
         "hash_code" : encrypted_code
     }
